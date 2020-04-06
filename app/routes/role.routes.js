@@ -5,7 +5,8 @@ module.exports = app => {
 
     // Créer un nouveau rôle :
     router.post("/", roles.create);
-
+    // Voir tous les rôles déjà créés : 
+    router.get("/", roles.findAll);
 
 
 
