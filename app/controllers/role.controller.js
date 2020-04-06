@@ -50,9 +50,6 @@ exports.create = (req, res) => {
         description: req.body.description
     };
 
-    console.log(role);
-    console.log(Role);
-
     // Sauvegarder le rôle en base.
     Role.create(role).then(data => res.send(data)).catch((error) => {
         res.status(500).send({
