@@ -4,7 +4,9 @@ const Op = db.Sequelize.Op;
 const regexMeta = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|]/;
 const regexMetaMax = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|\'\"]/;
 const regexSpace = /\s/;
-const regexString = /[âäàéèùêëîïôöçñ]/;
+const regexString = /[a-zA-Z]/;
+const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
+const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
 
 exports.create = (req, res) => {
@@ -30,7 +32,7 @@ exports.create = (req, res) => {
             message: "Caractère interdit détecté."
         });
         return;
-    } else if (regexString.test(req.body.role)) {
+    } else if (regexStringAccent.test(req.body.role)) {
         res.status(400).send({
             message: "Ne pas mettre d'accent pour un nom de rôle."
         });
@@ -68,7 +70,7 @@ exports.findAll = (req,res) => {
             message: "Caractère interdit détecté."
         });
         return;
-    } else if (regexString.test(req.body.role)) {
+    } else if (regexStringAccent.test(req.body.role)) {
         res.status(400).send({
             message: "Ne pas mettre d'accent pour un nom de rôle."
         });
@@ -100,8 +102,14 @@ exports.findAll = (req,res) => {
 };
 
 exports.findOneById = (req,res) => {
+     if(!regexInt.test(req.params.id) || regexMetaMax.test(req.params.id) || regexStringMax.test(req.params.id)) {
+        res.status(400).send({
+            message: "Vous devez spécifier un ID valide."
+        });
+        return;
+    }
     const role_id = req.params.id;
-
+    
     Role.findByPk(role_id)
     .then(data => {
         if (!data) {
@@ -166,7 +174,7 @@ exports.deleteAll = (req,res) => {
         truncate: false
     })
     .then(nums => {
-        res.send({ message: `${nums} Les rôles ont bien été supprimés !` });
+        res.send({ message: "Les "+`${nums} `+" rôles ont bien été supprimés !" });
       })
       .catch(err => {
         res.status(500).send({
