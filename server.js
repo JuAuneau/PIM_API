@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/role.routes")(app);
 require("./app/routes/responsable.routes")(app);
+require("./app/routes/service.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 db.sequelize.sync({alter: true}).then(async ()=> {

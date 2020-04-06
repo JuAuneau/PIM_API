@@ -1,20 +1,20 @@
 module.exports = app => {
-    const roles = require('../controllers/responsable.controller');
+    const responsables = require('../controllers/responsable.controller');
 
     var router = require("express").Router();
 
     // Créer un nouveau responsable :
-    router.post("/", roles.create);
+    router.post("/", responsables.create);
     // Voir tous les responsables déjà créés : 
-    router.get("/", roles.findAll);
+    router.get("/", responsables.findAll);
     // Recherche de responsable par id :
-    router.get("/:id", roles.findOneById);
+    router.get("/:id", responsables.findOneById);
     // Mettre à jour un responsable :
-    router.put("/:id", roles.update);
+    router.put("/:id", responsables.update);
     // Supprimer un responsable : 
-    router.delete("/:id", roles.delete);
+    router.delete("/:id", responsables.delete);
     // Supprimer tous les responsables :
-    router.delete("/", roles.deleteAll);
+    router.delete("/", responsables.deleteAll);
 
 
     app.use('/api/responsables', router);
