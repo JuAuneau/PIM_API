@@ -3,42 +3,13 @@ const Service = db.services;
 const Utilisateur = db.utilisateurs;
 const Op = db.Sequelize.Op;
 const regexMeta = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|]/;
-const regexMetaMax = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|\'\"]/;
+const regexMetaMax = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|\'\"\:\;\=\+]/;
 const regexSpace = /\s/;
 const regexString = /[a-zA-Z]/;
 const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
 const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
 
-exports.create = (req, res) => {
-    
-    // Valider la requête entrante.
-    if (!req.body.service) {
-        res.status(400).send({
-            message : "Vous devez spécifier un nom pour votre service !"
-        });
-        return;
-    } else if (regexMetaMax.test(req.body.service)) {
-        res.status(400).send({
-            message: "Caractère interdit détecté."
-        });
-        return;
-    } 
- 
-    // Créer un service.
-    const service = {
-        service: req.body.service
-    };
-
-    // Sauvegarder le service en base.
-    Service.create(service).then(data => res.send(data)).catch((error) => {
-        res.status(500).send({
-           message: error.errors[0].message
-        });
-    });
-    
-    
-};
 
 exports.findAll = (req,res) => {
     // Valider la requête entrante.
@@ -53,7 +24,9 @@ exports.findAll = (req,res) => {
 
     Service.findAll({
         attributes: ['service_id','service'],
-        where: condition}).then( data => {
+        where: condition,
+        include: Utilisateur
+    }).then( data => {
             console.log(data);
             if (!data[0]) {
                 res.status(500).send({ message: "Aucun service n'a été trouvé."})
@@ -68,8 +41,8 @@ exports.findAll = (req,res) => {
     });
 };
 
-exports.findOneById = (req,res) => {
-     if(!regexInt.test(req.params.id) || regexMetaMax.test(req.params.id) || regexStringMax.test(req.params.id)) {
+exports.findAllByServiceId = (req,res) => {
+        if(!regexInt.test(req.params.id) || regexMetaMax.test(req.params.id) || regexStringMax.test(req.params.id)) {
         res.status(400).send({
             message: "Vous devez spécifier un ID valide."
         });
@@ -77,7 +50,7 @@ exports.findOneById = (req,res) => {
     }
     const service_id = req.params.id;
     
-    Service.findByPk(service_id)
+    Service.findByPk(service_id, {include: Utilisateur})
     .then(data => {
         if (!data) {
             res.status(400).send({message: " Impossible de trouver le service spécifié avec l'ID : "+service_id+" !"});

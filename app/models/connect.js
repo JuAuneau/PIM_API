@@ -37,8 +37,8 @@ db.travailDifferentiels.belongsTo(db.utilisateurs);
 db.utilisateurs.hasMany(db.conges, {});
 db.conges.belongsTo(db.utilisateurs);
 
-db.utilisateurs.belongsToMany(db.services, {through: 'fonctions'});
-db.services.belongsToMany(db.utilisateurs, {through: 'fonctions'});
+db.services.hasMany(db.utilisateurs,{});
+db.utilisateurs.belongsTo(db.services);
 
 db.utilisateurs.hasMany(db.compteEpargneTemps, {});
 db.compteEpargneTemps.belongsTo(db.utilisateurs);
