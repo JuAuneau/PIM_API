@@ -8,7 +8,6 @@ const regexString = /[a-zA-Z]/;
 const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
 const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
-const reqControl = require("../helpers/reqControl"); 
 
 exports.create = (req, res) => {
     // Valider la requête entrante.
