@@ -8,9 +8,9 @@ const regexString = /[a-zA-Z]/;
 const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
 const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
+const reqControl = require("../helpers/reqControl"); 
 
 exports.create = (req, res) => {
-    
     // Valider la requête entrante.
     if (!req.body.role && !req.body.description) {
         res.status(400).send({
@@ -43,7 +43,7 @@ exports.create = (req, res) => {
         });
         return;
     }
- 
+    
     // Créer un rôle.
     const role = {
         role: req.body.role,
@@ -78,6 +78,7 @@ exports.findAll = (req,res) => {
         });
         return;
     }
+
     const role = req.body.role;
     var condition = role ? {role: {[Op.iLike]: `%${role}%`}} : null;
 

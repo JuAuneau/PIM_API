@@ -10,7 +10,6 @@ const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
 const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
 
-
 exports.findAll = (req,res) => {
     // Valider la requête entrante.
     if (regexMetaMax.test(req.body.service)) {
