@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const travailDifferentiel = sequelize.define("travailDifferentiel", {
+    const travailDifferentiel = sequelize.define("travail_differentiel", {
         travailDiff_id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,

@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const tempsTravail = sequelize.define("tempsTravail", {
+    const tempsTravail = sequelize.define("temps_travail", {
         tempsTravail_id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,

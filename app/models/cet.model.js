@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const CompteEpargneTemps = sequelize.define("compteEpargneTemps", {
+    const CompteEpargneTemps = sequelize.define("compte_epargne_temps", {
         cet_id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
