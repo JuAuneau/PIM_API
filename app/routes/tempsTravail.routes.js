@@ -17,5 +17,5 @@ module.exports = app => {
     //router.delete("/", tempsTravail.deleteAll);
 
 
-    app.use('/api/tempsTravail', router);
+    app.use('/api/tempsTravails', router);
 }
