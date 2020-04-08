@@ -31,6 +31,7 @@ require("./app/routes/utilisateur.routes")(app);
 require("./app/routes/serviceUtilisateur.routes")(app);
 require("./app/routes/tempsTravail.routes")(app);
 require("./app/routes/tempsTravailUtilisateur.routes")(app);
+require("./app/routes/cet.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 db.sequelize.sync({alter: true}).then(async ()=> {

@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        joursEpargnes: {
+        solde: {
             type: Sequelize.REAL,
             allowNull: false,
         },
