@@ -1,14 +1,12 @@
 module.exports = app => {
-    const cets = require('../controllers/cet.controller');
+    const cets = require('../controllers/cetUtilisateur.controller');
 
     var router = require("express").Router();
 
-    // Créer un nouveau cet :
-    router.post("/", cets.create);
     // Voir tous les cets déjà créés : 
-    router.get("/", cets.findAll);
-    // Recherche de cet par id :
-    router.get("/:id", cets.findOneById);
+    router.get("/all", cets.findAll);
+    // Recherche de cet par id utilisateur :
+    router.get("/mail", cets.findOneByUserMail);
     // Mettre à jour un cet :
     router.put("/:id", cets.update);
     // Supprimer un cet : 
@@ -17,5 +15,5 @@ module.exports = app => {
     router.delete("/", cets.deleteAll);
 
 
-    app.use('/api/cets', router);
+    app.use('/api/cetUtilisateur', router);
 }

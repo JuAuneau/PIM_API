@@ -1,5 +1,6 @@
 const db = require("../models/connect");
 const CompteEpargneTemps = db.compteEpargneTemps;
+const Utilisateurs = db.utilisateurs;
 const Op = db.Sequelize.Op;
 const regexMeta = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|]/;
 const regexMetaMax = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|\'\"]/;
@@ -9,39 +10,11 @@ const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
 const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
 
-exports.create = (req, res) => {
-    // Valider la requête entrante.
-    if (!req.body.solde) {
-        res.status(400).send({
-            message : "Vous devez spécifier un nombre de jours à épargner !"
-        });
-        return;
-    } else if (isNaN(req.body.solde)){
-        res.status(400).send({
-            message : "Vous devez spécifier un nombre de jour correct !"
-        });
-        return;
-    } 
-    
-    // Créer un cet.
-    const cet = {
-        solde: req.body.solde,
-        utilisateurUtilisateurId: req.body.utilisateurUtilisateurId
-    };
-
-    // Sauvegarder le cet en base.
-    CompteEpargneTemps.create(cet).then(data => res.send(data)).catch((error) => {
-        res.status(500).send({
-           message: error.errors[0].message
-        });
-    });
-    
-    
-};
 
 exports.findAll = (req,res) => {
     CompteEpargneTemps.findAll({
-        attributes: ['cet_id','solde','utilisateurUtilisateurId']
+        attributes: ['cet_id','solde'],
+        include: Utilisateurs
         }).then( data => {
             console.log(data);
             if (!data[0]) {
@@ -57,28 +30,43 @@ exports.findAll = (req,res) => {
     });
 };
 
-exports.findOneById = (req,res) => {
-     if(!regexInt.test(req.params.id) || regexMetaMax.test(req.params.id) || regexStringMax.test(req.params.id)) {
-        res.status(400).send({
-            message: "Vous devez spécifier un ID valide."
-        });
-        return;
-    }
-    const cet_id = req.params.id;
+exports.findOneByUserMail = (req,res) => {
+     
+    const mail = req.body.mail;
     
-    CompteEpargneTemps.findByPk(cet_id)
-    .then(data => {
-        if (!data) {
-            res.status(400).send({message: " Impossible de trouver le cet spécifié avec l'ID : "+cet_id+" !"});
-        } else {
-            res.send(data)
-        }
-    })
-    .catch( error => {
+    Utilisateurs.findAll({
+        where: {mail: mail}
+    }).catch ( error => {
         res.status(500).send({
             error
         });
-    });
+    }).then( data => {
+        console.log(data);
+    
+        if (!data[0].dataValues.utilisateur_id) {
+            res.status(400).send({message: " Impossible de trouver l'utilisateur avec le mail :'  "+mail+" !"});
+        } else {
+            CompteEpargneTemps.findAll({
+                where: {
+                   utilisateurUtilisateurId: data[0].dataValues.utilisateur_id 
+                }
+            })
+            .then(data => {
+                if (!data) {
+                    res.status(400).send({message: " Impossible de trouver le cet de l'utilisateur  "+mail+" !"});
+                } else {
+                    res.send(data)
+                }
+            })
+            .catch( error => {
+                res.status(500).send({
+                    error
+                });
+            });
+        }
+            
+    })
+    
 };
 
 exports.update = (req,res) => {
