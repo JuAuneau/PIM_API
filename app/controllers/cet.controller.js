@@ -87,7 +87,13 @@ exports.update = (req,res) => {
             message: "Vous devez spécifier un ID valide."
         });
         return;
+    } else if (!regexInt.test(req.body.ajout) || regexMetaMax.test(req.body.ajout) || regexStringMax.test(req.body.ajout)) {
+        res.status(400).send({
+            message: "Vous devez spécifier une valeur de jour à ajouter valide !"
+        });
+        return;
     }
+
     const cet_id = req.params.id;
     CompteEpargneTemps.findByPk(cet_id)
     .then(data => {

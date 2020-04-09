@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const tempsTravail = sequelize.define("temps_travail", {
-        tempsTravail_id: {
+        temps_travail_id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true
@@ -9,10 +9,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATEONLY,
             allowNull: false
         },
-        valeurJour: {
+        valeur_jour: {
             type: Sequelize.REAL,
         },
-        valeurHeure: {
+        valeur_heure: {
             type: Sequelize.REAL,
         }
     });

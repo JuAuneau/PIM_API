@@ -26,21 +26,21 @@ exports.create = (req, res) => {
         console.log(element.valeurHeure);
         console.log(element.valeurJour);
 
-        if (regexMetaDate.test(element.date) || (regexMetaDate.test(element.valeurHeure) || regexMetaDate.test(element.valeurJour))) {
+        if (regexMetaDate.test(element.date) || (regexMetaDate.test(element.valeur_heure) || regexMetaDate.test(element.valeur_jour))) {
             res.status(400).send({
                 message: "Caractère interdit détecté."
             });
-        } else if (regexSpace.test(element.date) || (regexSpace.test(element.valeurJour) || regexSpace.test(element.valeurHeure))) {
+        } else if (regexSpace.test(element.date) || (regexSpace.test(element.valeur_jour) || regexSpace.test(element.valeur_heure))) {
             res.status(400).send({
                 message: "Caractère interdit détecté !"
             });
-        } else if (element.valeurHeure) {
+        } else if (element.valeur_heure) {
             if (isNaN(element.valeurHeure)) {
                 tempsTravailErr.push(element);
             } else {
                 tempsTravail.push(element);
             }
-        } else if (element.valeurJour) {
+        } else if (element.valeur_jour) {
             if (isNaN(element.valeurJour)) {
                 tempsTravailErr.push(element);
             } else {
@@ -78,7 +78,7 @@ exports.findAll = (req,res) => {
     }
 
     const tempsTravailDate = req.body.date;
-    var condition = tempsTravailDate ? {tempsTravailDate: {[Op.iLike]: `%${tempsTravailDate}%`}} : null;
+    var condition = tempsTravailDate ? {date: {[Op.iLike]: `%${tempsTravailDate}%`}} : null;
 
     TempsTravail.findAll({
         attributes: ['tempsTravail_id','date','valeurHeure','valeurJour','utilisateurUtilisateurId'],
@@ -125,7 +125,7 @@ exports.update = (req,res) => {
     const tempsTravail_id = req.params.id;
 
     TempsTravail.update(req.body, {
-        where: {tempsTravail_id: tempsTravail_id}
+        where: {temps_travail_id: tempsTravail_id}
     })
     .then(num => {
         console.log(num);

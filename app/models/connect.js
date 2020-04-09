@@ -22,25 +22,39 @@ db.services = require('./service.model')(sequelize,Sequelize);
 db.compteEpargneTemps = require('./cet.model')(sequelize,Sequelize);
 
 // Relation entre table :
-db.roles.hasMany(db.utilisateurs, {});
+db.roles.hasMany(db.utilisateurs, {
+    foreignKey: 'role_id'
+});
 db.utilisateurs.belongsTo(db.roles);
 
-db.responsables.hasMany(db.utilisateurs, {});
+db.responsables.hasMany(db.utilisateurs, {
+    foreignKey: 'responsable_id'
+});
 db.utilisateurs.belongsTo(db.responsables);
 
-db.utilisateurs.hasMany(db.tempsTravails, {});
+db.utilisateurs.hasMany(db.tempsTravails, {
+    foreignKey: 'utilisateur_id'
+});
 db.tempsTravails.belongsTo(db.utilisateurs);
 
-db.utilisateurs.hasMany(db.travailDifferentiels, {});
+db.utilisateurs.hasMany(db.travailDifferentiels, {
+    foreignKey: 'utilisateur_id'
+});
 db.travailDifferentiels.belongsTo(db.utilisateurs);
 
-db.utilisateurs.hasMany(db.conges, {});
+db.utilisateurs.hasMany(db.conges, {
+    foreignKey: 'utilisateur_id'
+});
 db.conges.belongsTo(db.utilisateurs);
 
-db.services.hasMany(db.utilisateurs,{});
+db.services.hasMany(db.utilisateurs,{
+    foreignKey: 'service_id'
+});
 db.utilisateurs.belongsTo(db.services);
 
-db.utilisateurs.hasMany(db.compteEpargneTemps, {});
+db.utilisateurs.hasOne(db.compteEpargneTemps, {
+    foreignKey: 'utilisateur_id'
+});
 db.compteEpargneTemps.belongsTo(db.utilisateurs);
 
 // Synchronisation des tables :

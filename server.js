@@ -35,7 +35,7 @@ require("./app/routes/cet.routes")(app);
 require("./app/routes/cetUtilisateur.routes")(app)
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
-db.sequelize.sync({alter: true}).then(async ()=> {
+db.sequelize.sync({force: true}).then(async ()=> {
   console.log("Base de données initialisée !")
 }).then(
 app.listen(PORT, () => {

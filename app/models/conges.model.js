@@ -5,23 +5,23 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        dateDebut: {
+        date_debut: {
             type: Sequelize.DATEONLY,
             allowNull: false
         },
-        dateFin: {
+        date_fin: {
             type: Sequelize.DATEONLY,
             allowNull: false
         },
-        joursOuvres: {
+        jours_ouvres: {
             type: Sequelize.REAL,
         },
-        demieJAM: {
+        demie_jam: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
-        demieJPM: {
+        demie_jpm: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
             defaultValue: false

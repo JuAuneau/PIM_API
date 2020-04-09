@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const travailDifferentiel = sequelize.define("travail_differentiel", {
-        travailDiff_id: {
+        travail_diff_id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true
@@ -9,16 +9,16 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATEONLY,
             allowNull: false
         },
-        jourSupp: {
+        jour_supp: {
             type: Sequelize.REAL,
         },
-        jourMoins: {
+        jour_moins: {
             type: Sequelize.REAL,
         },
-        heureSupp: {
+        heure_supp: {
             type: Sequelize.REAL,
         },
-        heureMoins: {
+        heure_moins: {
             type: Sequelize.REAL,
         },
         commentaire: {
