@@ -52,7 +52,8 @@ exports.create = (req, res) => {
         nom: req.body.nom,
         prenom: req.body.prenom,
         mail: req.body.mail,
-        serviceServiceId: req.body.serviceServiceId
+        service_id: req.body.service_id,
+        role_id: req.body.role_id
     };
 
     // Sauvegarder le utilisateur en base.
@@ -78,7 +79,7 @@ exports.findAll = (req,res) => {
     var condition = mail ? {mail: {[Op.iLike]: `%${mail}%`}} : null;
 
     Utilisateur.findAll({
-        attributes: ['utilisateur_id', 'nom', 'prenom', 'mail','serviceServiceId','responsableResponsableId','roleRoleId'],
+        attributes: ['utilisateur_id', 'nom', 'prenom', 'mail','service_id','responsable_id','role_id'],
         where: condition,
         include: Service 
     }).then( data => {

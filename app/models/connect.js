@@ -25,37 +25,51 @@ db.compteEpargneTemps = require('./cet.model')(sequelize,Sequelize);
 db.roles.hasMany(db.utilisateurs, {
     foreignKey: 'role_id'
 });
-db.utilisateurs.belongsTo(db.roles);
+db.utilisateurs.belongsTo(db.roles,{
+    foreignKey: 'role_id'
+});
 
 db.responsables.hasMany(db.utilisateurs, {
     foreignKey: 'responsable_id'
 });
-db.utilisateurs.belongsTo(db.responsables);
+db.utilisateurs.belongsTo(db.responsables, {
+    foreignKey: 'responsable_id'
+});
 
 db.utilisateurs.hasMany(db.tempsTravails, {
     foreignKey: 'utilisateur_id'
 });
-db.tempsTravails.belongsTo(db.utilisateurs);
+db.tempsTravails.belongsTo(db.utilisateurs, {
+    foreignKey: 'utilisateur_id'
+});
 
 db.utilisateurs.hasMany(db.travailDifferentiels, {
     foreignKey: 'utilisateur_id'
 });
-db.travailDifferentiels.belongsTo(db.utilisateurs);
+db.travailDifferentiels.belongsTo(db.utilisateurs, {
+    foreignKey: 'utilisateur_id'
+});
 
 db.utilisateurs.hasMany(db.conges, {
     foreignKey: 'utilisateur_id'
 });
-db.conges.belongsTo(db.utilisateurs);
+db.conges.belongsTo(db.utilisateurs, {
+    foreignKey: 'utilisateur_id'
+});
 
 db.services.hasMany(db.utilisateurs,{
     foreignKey: 'service_id'
 });
-db.utilisateurs.belongsTo(db.services);
+db.utilisateurs.belongsTo(db.services, {
+    foreignKey: 'service_id'
+});
 
 db.utilisateurs.hasOne(db.compteEpargneTemps, {
     foreignKey: 'utilisateur_id'
 });
-db.compteEpargneTemps.belongsTo(db.utilisateurs);
+db.compteEpargneTemps.belongsTo(db.utilisateurs, {
+    foreignKey: 'utilisateur_id'
+});
 
 // Synchronisation des tables :
 /*db.roles.sync({alter: true});

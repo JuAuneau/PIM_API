@@ -23,8 +23,8 @@ exports.create = (req, res) => {
     req.body.data.forEach(element => {
 
         console.log(element.date);
-        console.log(element.valeurHeure);
-        console.log(element.valeurJour);
+        console.log(element.valeur_heure);
+        console.log(element.valeur_jour);
 
         if (regexMetaDate.test(element.date) || (regexMetaDate.test(element.valeur_heure) || regexMetaDate.test(element.valeur_jour))) {
             res.status(400).send({
@@ -35,13 +35,13 @@ exports.create = (req, res) => {
                 message: "Caractère interdit détecté !"
             });
         } else if (element.valeur_heure) {
-            if (isNaN(element.valeurHeure)) {
+            if (isNaN(element.valeur_heure)) {
                 tempsTravailErr.push(element);
             } else {
                 tempsTravail.push(element);
             }
         } else if (element.valeur_jour) {
-            if (isNaN(element.valeurJour)) {
+            if (isNaN(element.valeur_jour)) {
                 tempsTravailErr.push(element);
             } else {
                 tempsTravail.push(element);
@@ -81,7 +81,7 @@ exports.findAll = (req,res) => {
     var condition = tempsTravailDate ? {date: {[Op.iLike]: `%${tempsTravailDate}%`}} : null;
 
     TempsTravail.findAll({
-        attributes: ['tempsTravail_id','date','valeurHeure','valeurJour','utilisateurUtilisateurId'],
+        attributes: ['tempsTravail_id','date','valeur_heure','valeur_jour','utilisateur_id'],
         where: condition}).then( data => {
             console.log(data);
             if (!data[0]) {

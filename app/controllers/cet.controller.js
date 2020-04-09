@@ -26,8 +26,9 @@ exports.create = (req, res) => {
     // Créer un cet.
     const cet = {
         solde: req.body.solde,
-        utilisateurUtilisateurId: req.body.utilisateurUtilisateurId
+        utilisateur_id: req.body.utilisateur_id
     };
+    console.log(cet);
 
     // Sauvegarder le cet en base.
     CompteEpargneTemps.create(cet).then(data => res.send(data)).catch((error) => {
@@ -41,7 +42,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req,res) => {
     CompteEpargneTemps.findAll({
-        attributes: ['cet_id','solde','utilisateurUtilisateurId']
+        attributes: ['cet_id','solde','utilisateur_id']
         }).then( data => {
             console.log(data);
             if (!data[0]) {
@@ -97,7 +98,7 @@ exports.update = (req,res) => {
     const cet_id = req.params.id;
     CompteEpargneTemps.findByPk(cet_id)
     .then(data => {
-        const nouveauSolde = {solde: (data.solde + req.body.nb)};
+        const nouveauSolde = {solde: (data.solde + req.body.ajout)};
         CompteEpargneTemps.update(nouveauSolde, {
             where: {cet_id: cet_id}
         })

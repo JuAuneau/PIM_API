@@ -17,6 +17,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
             unique: 'compositeIndex'
+        },
+        actif: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            default: true
         }
     });
     return Utilisateur;
