@@ -59,7 +59,7 @@ exports.findAllByServiceId = (req,res) => {
     })
     .catch( error => {
         res.status(500).send({
-            error
+            message: error
         });
     });
 };
@@ -78,9 +78,9 @@ exports.update = (req,res) => {
             res.status(400).send({message: "Le service n'a pas pu être mit à jour."})
         }
     })
-    .catch(error => {
+    .catch( error => {
         res.status(500).send({
-            error
+            message: error
         });
     });
 
@@ -99,9 +99,9 @@ exports.delete = (req,res) => {
             res.status(400).send({message: "Le service n'a pas pu être supprimé."})
         }
     })
-    .catch(error => {
+    .catch( error => {
         res.status(500).send({
-            error
+            message: error
         });
     });
 

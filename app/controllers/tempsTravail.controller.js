@@ -135,9 +135,9 @@ exports.update = (req,res) => {
             res.status(400).send({message: "Le temps de travail n'a pas pu être mit à jour."})
         }
     })
-    .catch(error => {
+    .catch( error => {
         res.status(500).send({
-            error
+            message: error
         });
     });
 

@@ -38,7 +38,7 @@ exports.findOneByUserMail = (req,res) => {
         where: {mail: mail}
     }).catch ( error => {
         res.status(500).send({
-            error
+            message: error + " Une erreur s'est produite, cet adresse mail n'existe pas ou l'entrée n'est pas valide !"
         });
     }).then( data => {
         console.log(data);
@@ -60,46 +60,12 @@ exports.findOneByUserMail = (req,res) => {
             })
             .catch( error => {
                 res.status(500).send({
-                    error
+                    message: error
                 });
             });
         }
             
     })
-    
-};
-
-exports.update = (req,res) => {
-    if(!regexInt.test(req.params.id) || regexMetaMax.test(req.params.id) || regexStringMax.test(req.params.id)) {
-        res.status(400).send({
-            message: "Vous devez spécifier un ID valide."
-        });
-        return;
-    }
-    const cet_id = req.params.id;
-    CompteEpargneTemps.findByPk(cet_id)
-    .then(data => {
-        const nouveauSolde = {solde: (data.solde + req.body.nb)};
-        CompteEpargneTemps.update(nouveauSolde, {
-            where: {cet_id: cet_id}
-        })
-        .then(num => {
-            console.log(num);
-            if(num == 1) {
-                res.send({message: "Le solde a correctement été mit à jour."})
-            } else {
-                res.status(400).send({message: "Le solde n'a pas pu être mit à jour."})
-            }
-        })
-        .catch(error => {
-            res.status(500).send({
-                error
-            });
-        });
-    
-    });
-    
-
     
 };
 

@@ -76,7 +76,7 @@ exports.findOneById = (req,res) => {
     })
     .catch( error => {
         res.status(500).send({
-            error
+            message: error
         });
     });
 };
@@ -105,7 +105,7 @@ exports.update = (req,res) => {
         })
         .catch(error => {
             res.status(500).send({
-                error
+                message: error
             });
         });
     
@@ -130,7 +130,7 @@ exports.delete = (req,res) => {
     })
     .catch(error => {
         res.status(500).send({
-            error
+            message: error
         });
     });
 
