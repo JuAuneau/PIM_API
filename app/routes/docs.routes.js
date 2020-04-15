@@ -37,7 +37,9 @@ module.exports = app => {
         "./app/routes/cet.routes.js",
         "./app/models/tempsTravail.model.js",
         "./app/routes/tempsTravail.routes.js",
-        "./app/routes/cetUtilisateur.routes.js"
+        "./app/routes/cetUtilisateur.routes.js",
+        "./app/routes/serviceUtilisateur.routes.js",
+        "./app/routes/tempsTravailUtilisateur.routes.js"
     ]
       };
       const specs = swaggerJsdoc(options);
