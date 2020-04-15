@@ -1,8 +1,8 @@
 const db = require("../models/connect");
 const Role = db.roles;
 const Op = db.Sequelize.Op;
-const regexMeta = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|]/;
-const regexMetaMax = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\\\|\'\"]/;
+const regexMeta = /[\!\$\(\)\[\]\{\}\?\+\*\.\/\|]/;
+const regexMetaMax = /[\!\^\$\(\)\[\]\{\}\?\+\*\.\/\|\']/;
 const regexSpace = /\s/;
 const regexString = /[a-zA-Z]/;
 const regexStringAccent = /[âäàéèùêëîïôöçñ]/;
@@ -10,6 +10,7 @@ const regexStringMax = /[a-zA-Zâäàéèùêëîïôöçñ]/
 const regexInt = /[0-9]/;
 
 exports.create = (req, res) => {
+    console.log(req);
     // Valider la requête entrante.
     if (!req.body.role && !req.body.description) {
         res.status(400).send({
@@ -38,7 +39,7 @@ exports.create = (req, res) => {
         return;
     } else if (regexSpace.test(req.body.role)) {
         res.status(400).send({
-            message: "Caractère interdit détecté dans rôle."
+            message: "Espace interdit dans rôle."
         });
         return;
     }

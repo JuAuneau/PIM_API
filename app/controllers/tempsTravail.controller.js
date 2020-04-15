@@ -12,9 +12,10 @@ const regexInt = /[0-9]/;
 
 exports.create = (req, res) => {
     // Valider la requête entrante.
+    console.log(req.body.data);
     if (!req.body.data) {
         res.status(400).send({
-            message : "Vous devez spécifier une date !"
+            message : "Vous devez spécifier un tableau de donnée !"
         });
         return;
     };
@@ -22,27 +23,19 @@ exports.create = (req, res) => {
     const tempsTravailErr = [];
     req.body.data.forEach(element => {
 
-        console.log(element.date);
-        console.log(element.valeur_heure);
-        console.log(element.valeur_jour);
-
-        if (regexMetaDate.test(element.date) || (regexMetaDate.test(element.valeur_heure) || regexMetaDate.test(element.valeur_jour))) {
-            res.status(400).send({
-                message: "Caractère interdit détecté."
-            });
-        } else if (regexSpace.test(element.date) || (regexSpace.test(element.valeur_jour) || regexSpace.test(element.valeur_heure))) {
-            res.status(400).send({
-                message: "Caractère interdit détecté !"
-            });
+        if(!element.date){
+            tempsTravailErr.push({message: "Vous n'avez pas spécifié de date !"},element)
+        } else if (!element.valeur_heure && !element.valeur_jour)  {
+            tempsTravailErr.push({message: "Vous n'avez pas spécifié de temps de travail !"},element)
         } else if (element.valeur_heure) {
             if (isNaN(element.valeur_heure)) {
-                tempsTravailErr.push(element);
+                tempsTravailErr.push({message: "Veuillez entrer un temps de travail valide !"},element);
             } else {
                 tempsTravail.push(element);
             }
         } else if (element.valeur_jour) {
             if (isNaN(element.valeur_jour)) {
-                tempsTravailErr.push(element);
+                tempsTravailErr.push({message: "Veuillez entrer un temps de travail valide !"},element);
             } else {
                 tempsTravail.push(element);
             }
@@ -60,17 +53,17 @@ exports.create = (req, res) => {
 
 exports.findAll = (req,res) => {
     // Valider la requête entrante.
-    if (regexMetaDate.test(req.body.tempsTravailDate)) {
+    if (regexMetaDate.test(req.body.date)) {
         res.status(400).send({
             message: "Caractère interdit détecté."
         });
         return;
-    } else if (regexStringAccent.test(req.body.tempsTravailDate)) {
+    } else if (regexStringAccent.test(req.body.date)) {
         res.status(400).send({
             message: "Ne pas mettre d'accent pour un nom de temps de travail."
         });
         return;
-    } else if (regexSpace.test(req.body.tempsTravailDate)) {
+    } else if (regexSpace.test(req.body.date)) {
         res.status(400).send({
             message: "Caractère interdit détecté dans temps de travail."
         });
@@ -81,7 +74,7 @@ exports.findAll = (req,res) => {
     var condition = tempsTravailDate ? {date: {[Op.iLike]: `%${tempsTravailDate}%`}} : null;
 
     TempsTravail.findAll({
-        attributes: ['tempsTravail_id','date','valeur_heure','valeur_jour','utilisateur_id'],
+        attributes: ['temps_travail_id','date','valeur_heure','valeur_jour','utilisateur_id'],
         where: condition}).then( data => {
             console.log(data);
             if (!data[0]) {

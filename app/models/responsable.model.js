@@ -21,3 +21,29 @@ module.exports = (sequelize, Sequelize) => {
     });
     return Responsable;
 };
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Responsable:
+ *        type: object
+ *        required:
+ *          - nom
+ *          - prenom
+ *          - mail
+ *        properties:
+ *          responsable_id:
+ *            type: integer
+ *          nom:
+ *            type: string
+ *          prenom:
+ *            type: string
+ *          mail:
+ *            type: string
+ *            format: email
+ *        example:
+ *           responsable_id: 1
+ *           nom: Doe
+ *           prenom: John
+ *           mail: john.doe@briace.org
+ */

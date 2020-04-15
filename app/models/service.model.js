@@ -13,3 +13,21 @@ module.exports = (sequelize, Sequelize) => {
     });
     return Service;
 };
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Service:
+ *        type: object
+ *        required:
+ *          - Service
+ *        properties:
+ *          service_id:
+ *            type: integer
+ *          service:
+ *            type: string
+ *            description: Le nom du service.
+ *        example:
+ *           service_id: 1
+ *           service: Service Informatique
+ */

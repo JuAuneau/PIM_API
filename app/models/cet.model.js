@@ -12,3 +12,26 @@ module.exports = (sequelize, Sequelize) => {
     });
     return CompteEpargneTemps;
 };
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      CET:
+ *        type: object
+ *        required:
+ *          - solde
+ *          - utilisateur_id
+ *        properties:
+ *          cet_id:
+ *            type: integer
+ *          solde:
+ *            type: real
+ *            description: Le nombre de jours épargnés.
+ *          utilisateur_id:
+ *            type: integer
+ *            description: l'ID de l'utilisateur lié à ce compte épargne temps.
+ *        example:
+ *           cet_id: 1
+ *           solde: 14
+ *           utilisateur_id: 1
+ */

@@ -18,3 +18,60 @@ module.exports = (sequelize, Sequelize) => {
     });
     return tempsTravail;
 };
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      tempsTravail:
+ *        type: object
+ *        required:
+ *          - date
+ *          - utilisateur_id
+ *        properties:
+ *          temps_travail_id:
+ *            type: integer
+ *          date:
+ *            type: string
+ *            format: date
+ *            description: La date du jour travaillé.
+ *          valeur_jour:
+ *            type: real
+ *            description: La valeur si forfait jour, 1 0.5 ou 0
+ *          valeur_heure:
+ *            type: real
+ *            description: La valeur des heures travaillées ce jour.
+ *          utilisateur_id:
+ *            type: real
+ *            description: L'ID de l'utilisateur lié à ce temps de travail.
+ *        example:
+ *           temps_travail_id: 1
+ *           date: 02/01/2020
+ *           valeur_jour: 1
+ *           utilisateur_id: 1
+ *      arrayData:
+ *        type: object
+ *        properties:
+ *          data:
+ *            type: array
+ *            items:
+ *              type: object
+ *              properties:
+ *                date:
+ *                  type: string
+ *                  format: date
+ *                  description: La date du jour travaillé.
+ *                valeur_jour:
+ *                  type: real
+ *                  description: La valeur si forfait jour, 1 0.5 ou 0
+ *                valeur_heure:
+ *                  type: real
+ *                  description: La valeur des heures travaillées ce jour.
+ *                utilisateur_id:
+ *                  type: real
+ *                  description: L'ID de l'utilisateur lié à ce temps de travail.
+ *              example:
+ *                temps_travail_id: 1
+ *                date: '2020-04-14'
+ *                valeur_jour: 1
+ *                utilisateur_id: 4
+ */

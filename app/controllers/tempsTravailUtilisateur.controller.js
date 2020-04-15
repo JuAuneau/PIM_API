@@ -42,7 +42,7 @@ exports.findAllByUserId = (req,res) => {
     Utilisateur.findByPk(utilisateur_id, {include: TempsTravail})
     .then(data => {
         if (!data) {
-            res.status(400).send({message: " Impossible de trouver les temps de travail de l'utilisateur spécifié avec l'ID : "+utilisateurUtilisateurId+" !"});
+            res.status(400).send({message: " Impossible de trouver les temps de travail de l'utilisateur spécifié avec l'ID : "+utilisateur_id+" !"});
         } else {
             res.send(data)
         }

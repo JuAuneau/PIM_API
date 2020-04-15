@@ -129,7 +129,7 @@ exports.update = (req,res) => {
     .then(num => {
         console.log(num);
         if(num == 1) {
-            res.send({message: "Le utilisateur a correctement été mit à jour."})
+            res.status(201).send({message: "Le utilisateur a correctement été mit à jour."})
         } else {
             res.status(400).send({message: "Le utilisateur n'a pas pu être mit à jour."})
         }
@@ -150,7 +150,7 @@ exports.delete = (req,res) => {
     .then(num => {
         console.log(num);
         if(num == 1) {
-            res.send({message: "Le utilisateur a correctement été supprimé"})
+            res.status(201).send({message: "Le utilisateur a correctement été supprimé"})
         } else {
             res.status(400).send({message: "Le utilisateur n'a pas pu être supprimé."})
         }
@@ -169,7 +169,7 @@ exports.deleteAll = (req,res) => {
         truncate: false
     })
     .then(nums => {
-        res.send({ message: "Les "+`${nums} `+" utilisateurs ont bien été supprimés !" });
+        res.status(201).send({ message: "Les "+`${nums} `+" utilisateurs ont bien été supprimés !" });
       })
       .catch(err => {
         res.status(500).send({

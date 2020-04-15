@@ -32,7 +32,7 @@ exports.findAll = (req,res) => {
 
 exports.findOneByUserMail = (req,res) => {
      
-    const mail = req.body.mail;
+    const mail = req.params.mail;
     
     Utilisateurs.findAll({
         where: {mail: mail}
@@ -48,7 +48,7 @@ exports.findOneByUserMail = (req,res) => {
         } else {
             CompteEpargneTemps.findAll({
                 where: {
-                   utilisateurUtilisateurId: data[0].dataValues.utilisateur_id 
+                   utilisateur_id: data[0].dataValues.utilisateur_id 
                 }
             })
             .then(data => {

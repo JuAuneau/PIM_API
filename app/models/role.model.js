@@ -17,3 +17,26 @@ module.exports = (sequelize, Sequelize) => {
     });
     return Role;
 };
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Role:
+ *        type: object
+ *        required:
+ *          - role
+ *          - description
+ *        properties:
+ *          role_id:
+ *            type: integer
+ *          role:
+ *            type: string
+ *            description: Le nom du rôle.
+ *          description:
+ *            type: string
+ *            description: La description du rôle.
+ *        example:
+ *           role_id: 1
+ *           role: Adminstrateur
+ *           description: Le rôle administrateur de l'application.
+ */
