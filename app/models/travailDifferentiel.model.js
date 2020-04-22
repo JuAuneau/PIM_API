@@ -69,7 +69,7 @@ module.exports = (sequelize, Sequelize) => {
  *            description: Attribue un utilisateur au temps de travail différentiel.
  *        example:
  *           travail_diff_id: 1
- *           date: 02/01/2020
+ *           date: '2020-01-02'
  *           jour_supp: 0.5
  *           jour_moins: null
  *           heure_supp: null

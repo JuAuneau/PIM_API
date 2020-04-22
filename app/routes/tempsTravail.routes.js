@@ -21,7 +21,7 @@ module.exports = app => {
 *          content:
 *            application/json:
 *              schema:
-*                $ref: '#/components/schemas/arrayData'
+*                $ref: '#/components/schemas/tempsTravailArray'
 *        responses:
 *          "200":
 *            description: Attribus d'un temps de travail.

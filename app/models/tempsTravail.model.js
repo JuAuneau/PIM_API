@@ -48,7 +48,7 @@ module.exports = (sequelize, Sequelize) => {
  *           date: 02/01/2020
  *           valeur_jour: 1
  *           utilisateur_id: 1
- *      arrayData:
+ *      tempsTravailArray:
  *        type: object
  *        properties:
  *          data:
