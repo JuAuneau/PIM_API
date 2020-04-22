@@ -20,6 +20,7 @@ db.travailDifferentiels = require('./travailDifferentiel.model')(sequelize,Seque
 db.conges = require('./conges.model')(sequelize,Sequelize);
 db.services = require('./service.model')(sequelize,Sequelize);
 db.compteEpargneTemps = require('./cet.model')(sequelize,Sequelize);
+db.contrat = require("./contrat.model")(sequelize,Sequelize);
 
 // Relation entre table :
 db.roles.hasMany(db.utilisateurs, {
@@ -27,6 +28,13 @@ db.roles.hasMany(db.utilisateurs, {
 });
 db.utilisateurs.belongsTo(db.roles,{
     foreignKey: 'role_id'
+});
+
+db.utilisateurs.hasMany(db.contrat, {
+    foreignKey: 'utilisateur_id'
+});
+db.contrat.belongsTo(db.utilisateurs, {
+    foreignKey: 'utilisateur_id'
 });
 
 db.responsables.hasMany(db.utilisateurs, {
