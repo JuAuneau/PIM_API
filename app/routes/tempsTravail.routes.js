@@ -6,8 +6,8 @@ module.exports = app => {
     /**
  * @swagger
  * tags:
- *   name: tempsTravails
- *   description: Gestion des tempsTravails.
+ *   name: Temps de travails
+ *   description: Gestion des Temps de Travails.
  */
 /**
 *  @swagger
@@ -15,7 +15,7 @@ module.exports = app => {
 *    /tempsTravails/:
 *      post:
 *        summary: Créer un nouveau temps de travail.
-*        tags: [tempsTravails]
+*        tags: [Temps de travails]
 *        requestBody:
 *          required: true
 *          content:
@@ -40,7 +40,7 @@ module.exports = app => {
  *  /tempsTravails/:
  *    get:
  *      summary: Retourne tous les tempsTravails.
- *      tags: [tempsTravails]
+ *      tags: [Temps de travails]
  *      responses:
  *        "200":
  *          description: Un tableau de données des tempsTravails.
@@ -59,7 +59,7 @@ module.exports = app => {
  *  /tempsTravails/{temps_travail_id}:
  *    put:
  *      summary: Mettre à jour un ou plusieurs attribus d'un temps de travail.
- *      tags: [tempsTravails]
+ *      tags: [Temps de travails]
  *      parameters:
  *        - in: path
  *          name: temps_travail_id

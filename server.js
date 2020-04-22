@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -43,7 +44,8 @@ require("./app/routes/serviceUtilisateur.routes")(app);
 require("./app/routes/tempsTravail.routes")(app);
 require("./app/routes/tempsTravailUtilisateur.routes")(app);
 require("./app/routes/cet.routes")(app);
-require("./app/routes/cetUtilisateur.routes")(app)
+require("./app/routes/cetUtilisateur.routes")(app);
+require("./app/routes/tempsTravailDiff.routes")(app);
 require("./app/routes/docs.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
