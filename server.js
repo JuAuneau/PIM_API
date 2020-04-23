@@ -6,6 +6,13 @@ const db = require("./app/models/connect");
 const morgan = require("morgan");
 const app = express();
 const swagger = require("swagger-ui-dist").absolutePath();
+var session = require('express-session');
+var Keycloak = require('keycloak-connect');
+
+var memoryStore = new session.MemoryStore();
+var keycloak = new Keycloak({ store: memoryStore });
+
+
 
 var whiteList = ['http://127.0.0.1:51437','http://localhost:8081','http://localhost:8080','http://127.0.0.1:8081','http://127.0.0.1:8080'];
 var corsOptions = {
@@ -46,6 +53,7 @@ require("./app/routes/tempsTravailUtilisateur.routes")(app);
 require("./app/routes/cet.routes")(app);
 require("./app/routes/cetUtilisateur.routes")(app);
 require("./app/routes/tempsTravailDiff.routes")(app);
+require("./app/routes/conges.routes")(app);
 require("./app/routes/docs.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

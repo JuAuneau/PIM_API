@@ -14,6 +14,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         valeur_heure: {
             type: Sequelize.REAL,
+        },
+        previsionnel: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     });
     return tempsTravail;
@@ -40,6 +45,9 @@ module.exports = (sequelize, Sequelize) => {
  *          valeur_heure:
  *            type: real
  *            description: La valeur des heures travaillées ce jour.
+ *          previsionnel:
+ *            type: boolean
+ *            description: Défini si le temps de travail est prévisionnel ou réel, valeur par défaut = true.
  *          utilisateur_id:
  *            type: real
  *            description: L'ID de l'utilisateur lié à ce temps de travail.
@@ -47,6 +55,7 @@ module.exports = (sequelize, Sequelize) => {
  *           temps_travail_id: 1
  *           date: 02/01/2020
  *           valeur_jour: 1
+ *           previsionnel: true
  *           utilisateur_id: 1
  *      tempsTravailArray:
  *        type: object
@@ -66,6 +75,9 @@ module.exports = (sequelize, Sequelize) => {
  *                valeur_heure:
  *                  type: real
  *                  description: La valeur des heures travaillées ce jour.
+ *                previsionnel:
+ *                  type: boolean
+ *                  description: Défini si le temps de travail est prévisionnel ou réel, valeur par défaut = true.
  *                utilisateur_id:
  *                  type: real
  *                  description: L'ID de l'utilisateur lié à ce temps de travail.
@@ -73,5 +85,6 @@ module.exports = (sequelize, Sequelize) => {
  *                temps_travail_id: 1
  *                date: '2020-04-14'
  *                valeur_jour: 1
+ *                previsionnel: true
  *                utilisateur_id: 4
  */

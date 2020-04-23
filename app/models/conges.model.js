@@ -13,9 +13,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATEONLY,
             allowNull: false
         },
-        jours_ouvres: {
-            type: Sequelize.REAL,
-        },
         demie_jam: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
@@ -34,6 +31,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false,
             defaultValue: false
+        },
+        previsionnel: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         },
         refus: {
             type: Sequelize.BOOLEAN,
@@ -69,8 +71,6 @@ module.exports = (sequelize, Sequelize) => {
  *                  type: string
  *                  format: date
  *                  description: La date de fin des congés.
- *                jour_ouvres:
- *                  type: real
  *                demie_jam:
  *                  type: real
  *                  description: Si cp = demie journée du matin.
@@ -83,6 +83,9 @@ module.exports = (sequelize, Sequelize) => {
  *                validation:
  *                  type: boolean
  *                  description: Etat de validation des congés, valeur par défaut false.
+ *                previsionnel:
+ *                  type: boolean
+ *                  description: Définit si le congé posé est prévisionnel ou réel valeur par défaut = true.
  *                refus:
  *                  type: boolean
  *                  description: Si refusé, valeur défini à True.
@@ -96,11 +99,11 @@ module.exports = (sequelize, Sequelize) => {
  *                conges_id: 1
  *                date_debut: '2020-04-14'
  *                date_fin: '2020-04-24'
- *                jour_ouvres: 9
  *                demie_jam: false
  *                demie_jpm: false
  *                commentaire: Congés d'hiver.
  *                validation: true
+ *                previsionnel: true
  *                refus: false
  *                motif: null
  *                utilisateur_id: 4

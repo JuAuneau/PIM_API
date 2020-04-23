@@ -1,10 +1,16 @@
 module.exports = app => {
 
-    const Utilisateur = require("../models/utilisateur.model");
     const swaggerJsdoc = require("swagger-jsdoc");
     const swaggerUi = require("swagger-ui-express");
     var router = require("express").Router();
 
+    var session = require('express-session');
+    var Keycloak = require('keycloak-connect');
+
+    var memoryStore = new session.MemoryStore();
+    var keycloak = new Keycloak({ store: memoryStore });
+    
+    
     // Swagger set up
     const options = {
         swaggerDefinition: {
@@ -21,7 +27,7 @@ module.exports = app => {
           },
           servers: [
             {
-              url: "http://localhost:8080/api"
+              url: "http://localhost:3000/api"
             }
           ]
         },
@@ -49,10 +55,12 @@ module.exports = app => {
       const specs = swaggerJsdoc(options);
       router.use("/", swaggerUi.serve);
       router.get(
-        "/",
+        "/docs", 
         swaggerUi.setup(specs, {
           explorer: false
-        })
+        }), 
       );
-      app.use('/api/docs', router);
+      
+      app.use('/api',router);
+      
 }

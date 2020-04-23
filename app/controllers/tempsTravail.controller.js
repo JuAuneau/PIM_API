@@ -73,17 +73,16 @@ exports.findAll = (req,res) => {
     const tempsTravailDate = req.body.date;
     var condition = tempsTravailDate ? {date: {[Op.iLike]: `%${tempsTravailDate}%`}} : null;
 
-    TempsTravail.findAll({
-        attributes: ['temps_travail_id','date','valeur_heure','valeur_jour','utilisateur_id'],
-        where: condition}).then( data => {
-            console.log(data);
+    TempsTravail.findAll()
+    .then( data => {
             if (!data[0]) {
                 res.status(500).send({ message: "Aucun temps de travail n'a été trouvé."})
             } else {
                 res.send(data);
             };
 
-    }).catch( error => {
+    })
+    .catch( error => {
         res.status(500).send({
            message: error.errors[0].message
         });

@@ -3,9 +3,13 @@ module.exports = app => {
 
     const utilisateurs = require('../controllers/utilisateur.controller');
     const Utilisateurs = require('../models/utilisateur.model');
-
+    var session = require('express-session');
+    var Keycloak = require('keycloak-connect');
+    
+    var memoryStore = new session.MemoryStore();
+    var keycloak = new Keycloak({ store: memoryStore });
     var router = require("express").Router();
-
+    //app.use(keycloak.middleware());
 /**
  * @swagger
  * tags:
@@ -157,7 +161,7 @@ module.exports = app => {
  *          description: un message d'erreur lié à une erreur en base de données.
  */
     // Supprimer tous les utilisateurs :
-    //router.delete("/", utilisateurs.deleteAll);
+    router.delete("/", utilisateurs.deleteAll);
 
 
     app.use('/api/utilisateurs', router);
