@@ -116,4 +116,4 @@ dist
 config/
 
 # keycloack
-keycloack.json
+keycloak.json
